@@ -1,9 +1,14 @@
 #include <cstdio>
+#include <math.h>
 
 struct Pair {
   int x;
   int y;
 };
+
+int distance(Pair a, Pair b) {
+	return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+}
 
 Pair operator + (Pair a, Pair b) {
   Pair c;
@@ -11,12 +16,14 @@ Pair operator + (Pair a, Pair b) {
   c.y = a.y + b.y;
   return c;
 }
+
 Pair operator - (Pair a, Pair b) {
   Pair c;
   c.x = a.x - b.x;
   c.y = a.y - b.y;
   return c;
 }
+
 Pair operator * (Pair a, Pair b) {
   Pair c;
   c.x = a.x * b.x;
@@ -24,29 +31,29 @@ Pair operator * (Pair a, Pair b) {
   return c;
 }
 
-Pair add(Pair a, Pair b) {
-  return a + b;
+bool operator == (Pair a, Pair b) {
+  if (a.x == b.x && a.y == b.y) {
+    return true;
+  }
+  return false;
 }
 
-Pair sub(Pair a, Pair b) {
-  return a - b;
+bool operator < (Pair a, Pair b) {
+  Pair ZERO = {0, 0};
+  if (distance(a, ZERO) < distance(b, ZERO)) {
+    return true;
+  }
+  return false;
 }
-
-Pair mul(Pair a, Pair b) {
-  return a * b;
+  
+bool operator > (Pair a, Pair b) {
+  Pair ZERO = {0, 0};
+  if (distance(a, ZERO) > distance(b, ZERO)) {
+    return true;
+  }
+  return false;
 }
-
-//operator < ??
-//operator > ??
 
 int main(int argc, char** argv) {
-  Pair A = {2, -9};
-  Pair B = {-1, 1};
-  Pair C = add(A, B);
-  printf("%i %i\n", C.x, C.y);
-  C = sub(A, B);
-  printf("%i %i\n", C.x, C.y);
-  C = mul(A, B);
-  printf("%i %i\n", C.x, C.y);
   return 0;
 }
