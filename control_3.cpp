@@ -6,10 +6,6 @@ struct Pair {
   int y;
 };
 
-int distance(Pair a, Pair b) {
-	return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
-}
-
 Pair operator + (Pair a, Pair b) {
   Pair c;
   c.x = a.x + b.x;
@@ -38,17 +34,15 @@ bool operator == (Pair a, Pair b) {
   return false;
 }
 
-bool operator < (Pair a, Pair b) {
-  Pair ZERO = {0, 0};
-  if (distance(a, ZERO) < distance(b, ZERO)) {
+bool operator < (Pair left, Pair right) {
+  if ((sqrt(left.x * left.x + left.y * left.y)) < (sqrt(right.x * right.x + right.y * right.y))) {
     return true;
   }
   return false;
 }
   
-bool operator > (Pair a, Pair b) {
-  Pair ZERO = {0, 0};
-  if (distance(a, ZERO) > distance(b, ZERO)) {
+bool operator > (Pair left, Pair right) {
+  if ((sqrt(left.x * left.x + left.y * left.y)) > (sqrt(right.x * right.x + right.y * right.y))) {
     return true;
   }
   return false;
